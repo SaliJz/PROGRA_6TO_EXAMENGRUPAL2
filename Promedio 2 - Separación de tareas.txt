@@ -1,0 +1,6 @@
+Promedio 2 - Separación de tareas del examen grupal:
+
+- Jorge: Arquitectura base (Clases abstractas e interfaces) + Sistema de combate y turnos
+- Rodrigo: Sistema de personajes estilo DND
+- Joaquin: Graph Toolkit + Configuración e integración del sistema de Localización
+- Emerson: Configuración e integración del Addressables + Pantallas
