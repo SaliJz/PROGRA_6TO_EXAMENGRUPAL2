@@ -9,7 +9,7 @@ public class CombatStarter : MonoBehaviour
     [SerializeField] private GameObject storyPanel;
     private TurnManager turnManager;
 
-    void Start()
+    private void Start()
     {
         turnManager = FindAnyObjectByType<TurnManager>(FindObjectsInactive.Include);
         // Enemigos desactivados al inicio
@@ -29,12 +29,12 @@ public class CombatStarter : MonoBehaviour
     {
         foreach (var e in enemyObjects) e.SetActive(false);
         combatPanel.SetActive(false);
-        FindObjectOfType<ResultPanel>().ShowVictory();
+        FindAnyObjectByType<ResultPanel>(FindObjectsInactive.Include).ShowVictory();
     }
 
     public void OnCombatDefeat()
     {
         combatPanel.SetActive(false);
-        FindObjectOfType<ResultPanel>().ShowDefeat();
+        FindAnyObjectByType<ResultPanel>(FindObjectsInactive.Include).ShowDefeat();
     }
 }
