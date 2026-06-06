@@ -37,19 +37,14 @@ public class DialogController : MonoBehaviour
 
         if (node is TextRuntimeNode textNode)
         {
-            storyManager?.ShowStoryUI();
-
-            storyUI.ShowText(
-                textNode.textES,
-                textNode.textEN,
-                () => OnContinueFromText(textNode)
-            );
+            storyManager.ShowStoryUI();
+            storyUI.ShowText(textNode.textES, textNode.textEN, () => OnContinueFromText(textNode));
             return;
         }
 
         if (node is CombatRuntimeNode combatNode)
         {
-            storyManager?.ShowCombatUI();
+            storyManager.ShowCombatUI();
             storyUI.HideAll();
             combatStarter.BeginCombat(this, combatNode);
             return;
@@ -57,7 +52,7 @@ public class DialogController : MonoBehaviour
 
         if (node is EndingRuntimeNode endingNode)
         {
-            storyManager?.ShowStoryUI();
+            storyManager.ShowEndingUI();
             storyUI.ShowEnding(endingNode.textES, endingNode.textEN);
             return;
         }
@@ -82,30 +77,19 @@ public class DialogController : MonoBehaviour
             return;
         }
 
-        Debug.Log("Dialog finished: no choices and no next node.");
         storyUI.HideAll();
     }
 
     private void OnChoiceSelected(ChoiceRuntimeNode selectedChoice)
     {
-        if (selectedChoice == null)
-        {
-            Debug.LogWarning("Selected choice is null.");
-            return;
-        }
-
+        if (selectedChoice == null) return;
         currentNodeIndex = selectedChoice.nextNodeIndex;
         ShowCurrentNode();
     }
 
     public void OnCombatFinished(bool playerWon, CombatRuntimeNode combatNode)
     {
-        if (combatNode == null)
-        {
-            Debug.LogError("Combat node is null.");
-            return;
-        }
-
+        if (combatNode == null) return;
         currentNodeIndex = playerWon ? combatNode.onWinNextIndex : combatNode.onLoseNextIndex;
         ShowCurrentNode();
     }

@@ -4,8 +4,10 @@ public class StoryManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private DialogController dialogController;
-    [SerializeField] private GameObject storyCanvas;
-    [SerializeField] private GameObject combatCanvas;
+    [SerializeField] private GameObject storyPanel;
+    [SerializeField] private GameObject choicesPanel;
+    [SerializeField] private GameObject combatPanel;
+    [SerializeField] private GameObject endingPanel;
 
     private void Start()
     {
@@ -14,9 +16,7 @@ public class StoryManager : MonoBehaviour
 
     public void StartStory()
     {
-        if (storyCanvas != null) storyCanvas.SetActive(true);
-
-        if (combatCanvas != null) combatCanvas.SetActive(false);
+        ShowStoryUI();
 
         if (dialogController == null)
         {
@@ -29,20 +29,33 @@ public class StoryManager : MonoBehaviour
 
     public void ShowStoryUI()
     {
-        if (storyCanvas != null) storyCanvas.SetActive(true);
+        if (storyPanel != null) storyPanel.SetActive(true);
+        if (choicesPanel != null) choicesPanel.SetActive(false);
+        if (combatPanel != null) combatPanel.SetActive(false);
+        if (endingPanel != null) endingPanel.SetActive(false);
+    }
 
-        if (combatCanvas != null) combatCanvas.SetActive(false);
+    public void ShowChoicesUI()
+    {
+        if (storyPanel != null) storyPanel.SetActive(false);
+        if (choicesPanel != null) choicesPanel.SetActive(true);
+        if (combatPanel != null) combatPanel.SetActive(false);
+        if (endingPanel != null) endingPanel.SetActive(false);
     }
 
     public void ShowCombatUI()
     {
-        if (storyCanvas != null) storyCanvas.SetActive(false);
-
-        if (combatCanvas != null) combatCanvas.SetActive(true);
+        if (storyPanel != null) storyPanel.SetActive(false);
+        if (choicesPanel != null) choicesPanel.SetActive(false);
+        if (combatPanel != null) combatPanel.SetActive(true);
+        if (endingPanel != null) endingPanel.SetActive(false);
     }
 
-    public void RestartStory()
+    public void ShowEndingUI()
     {
-        StartStory();
+        if (storyPanel != null) storyPanel.SetActive(false);
+        if (choicesPanel != null) choicesPanel.SetActive(false);
+        if (combatPanel != null) combatPanel.SetActive(false);
+        if (endingPanel != null) endingPanel.SetActive(true);
     }
 }

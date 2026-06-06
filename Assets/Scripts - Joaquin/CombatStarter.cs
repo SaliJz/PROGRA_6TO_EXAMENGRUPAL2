@@ -5,7 +5,7 @@ using UnityEngine;
 public class CombatStarter : MonoBehaviour
 {
     [SerializeField] private TurnManager turnManager;
-    [SerializeField] private GameObject combatPanel;
+    [SerializeField] private SceneLoader sceneLoader;
 
     [Header("Scene Characters")]
     [SerializeField] private List<PlayerCharacter> players;
@@ -20,11 +20,9 @@ public class CombatStarter : MonoBehaviour
         currentDialogController = dialogController;
         currentCombatNode = combatNode;
 
-        combatPanel.SetActive(true);
-
         foreach (var enemy in enemies)
         {
-            enemy.gameObject.SetActive(true);
+            if (enemy != null) enemy.gameObject.SetActive(true);
         }
 
         List<Character> combatants = new List<Character>();
@@ -42,29 +40,21 @@ public class CombatStarter : MonoBehaviour
         bool allEnemiesDead = enemies.All(e => e == null || e.CurrentHealth <= 0 || !e.gameObject.activeSelf);
         bool allPlayersDead = players.All(p => p == null || p.CurrentHealth <= 0 || !p.gameObject.activeSelf);
 
-        if (allEnemiesDead)
-        {
-            EndCombat(true);
-        }
-        else if (allPlayersDead)
-        {
-            EndCombat(false);
-        }
+        if (allEnemiesDead) EndCombat(true);
+        else if (allPlayersDead) EndCombat(false);
     }
 
     private void EndCombat(bool playerWon)
     {
         combatActive = false;
-        combatPanel.SetActive(false);
 
-        foreach (var enemy in enemies)
+        if (playerWon)
         {
-            if (enemy != null && enemy.CurrentHealth <= 0)
-            {
-                enemy.gameObject.SetActive(false);
-            }
+            if (sceneLoader != null) sceneLoader.LoadVictory();
         }
-
-        currentDialogController.OnCombatFinished(playerWon, currentCombatNode);
+        else
+        {
+            if (sceneLoader != null) sceneLoader.LoadDefeat();
+        }
     }
 }
