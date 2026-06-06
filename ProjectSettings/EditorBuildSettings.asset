@@ -8,6 +8,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Joaquin/MainMenu.unity
+    guid: e57de588e9413ac45825943c440b6c13
+  - enabled: 1
+    path: Assets/Scenes/Joaquin/Level.unity
+    guid: 2af184c27e6f7e64cb4f678d6168abc1
+  - enabled: 1
+    path: Assets/Scenes/Joaquin/VictoryScreen.unity
+    guid: a126e68821a4d51439e25e347baeafb6
+  - enabled: 1
+    path: Assets/Scenes/Joaquin/DefeatScreen.unity
+    guid: 33445ebe1d2fe5845904a2a1b2324852
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: b2cdb8b55d8bd7a4e90bf3e1173bf01f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
